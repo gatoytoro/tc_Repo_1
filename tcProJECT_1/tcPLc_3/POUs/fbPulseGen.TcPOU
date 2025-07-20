@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.15">
+  <POU Name="fbPulseGen" Id="{37c5472e-5bc4-4c88-b877-f3a2372b51e1}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK fbPulseGen
+VAR_INPUT
+	bEnable : BOOL;
+	tOn : TIME;
+	tCycle : TIME;
+END_VAR
+VAR_OUTPUT
+	bOut : BOOL;
+END_VAR
+VAR
+	tTimer1 : TON;
+	tOutTimer : TON;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[tTimer1.IN := bEnable AND NOT tTimer1.Q;
+tTimer1.PT := tCycle;
+tTimer1();
+
+tOutTimer.IN := tTimer1.IN;
+tOutTimer.PT := tOn;
+tOutTimer();
+
+IF bEnable AND (tOutTimer.IN AND NOT tOutTimer.Q) THEN
+	bOut := TRUE;
+ELSE 
+	bOut := FALSE;
+END_IF
+]]></ST>
+    </Implementation>
+    <LineIds Name="fbPulseGen">
+      <LineId Id="15" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="29" Count="1" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="35" Count="1" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="16" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

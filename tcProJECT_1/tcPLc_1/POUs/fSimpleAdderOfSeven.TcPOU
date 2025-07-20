@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.15">
+  <POU Name="fSimpleAdderOfSeven" Id="{e7cb3896-3785-403c-a5bd-0414abe5e77a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION fSimpleAdderOfSeven : INT
+VAR_INPUT
+	nInt1 : INT;
+	bBitIn : bool;
+END_VAR
+VAR
+	bBit1 : BOOL;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[bBit1 := bBitIn;
+
+IF bBit1 THEN
+	fSimpleAdderOfSeven := nInt1 + 7;
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="fSimpleAdderOfSeven">
+      <LineId Id="18" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="10" Count="1" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

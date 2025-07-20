@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.15">
+  <POU Name="fbLED_Toggle" Id="{e505b398-dd8e-46c8-850c-8656ba63d7c6}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK fbLED_Toggle
+VAR_INPUT
+	bToggleBtn : BOOL;
+	bReset : bool; //would have to pass an input from main as well
+END_VAR
+VAR
+	bRisingEdge : R_Trig;
+END_VAR
+VAR_OUTPUT
+	bLED : BOOL;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[bRisingEdge(CLK := bToggleBtn);
+
+//ok code --> no double trigger of back-to-back if stmnts in same cycle
+IF bRisingEdge.Q AND NOT bLED THEN
+	bLED := TRUE;
+ELSIF bRisingEdge.Q AND bLED THEN
+	bLED := FALSE;
+END_IF
+
+//better code
+IF bRisingEdge.Q THEN
+	bLED := NOT bLED;
+END_IF
+
+//if want to add a reset button (estop, manual override, etc.)
+IF bReset THEN
+	bLED := FALSE;
+ELSIF
+	bRisingEdge.Q THEN
+	bLED := NOT bLED;
+END_IF
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="fbLED_Toggle">
+      <LineId Id="33" Count="0" />
+      <LineId Id="65" Count="0" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="61" Count="1" />
+      <LineId Id="64" Count="0" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="67" Count="0" />
+      <LineId Id="66" Count="0" />
+      <LineId Id="68" Count="0" />
+      <LineId Id="71" Count="0" />
+      <LineId Id="36" Count="0" />
+      <LineId Id="73" Count="0" />
+      <LineId Id="72" Count="0" />
+      <LineId Id="74" Count="0" />
+      <LineId Id="76" Count="0" />
+      <LineId Id="78" Count="2" />
+      <LineId Id="77" Count="0" />
+      <LineId Id="82" Count="0" />
+      <LineId Id="81" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

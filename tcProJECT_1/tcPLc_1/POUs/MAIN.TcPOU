@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.15">
+  <POU Name="MAIN" Id="{4cd38913-5b15-4584-82c5-4391beba8503}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	nData1 : fbAdderOfTwentyFive;
+	nData2 : INT;
+	bBit1 : BOOL;
+	sText1 : string(5);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+IF bBit1 THEN
+	nData1.nInt1 := nData2;
+	nData1();
+	nData2 := nData1.nInt2;
+	bBit1 := FALSE;
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="10" Count="0" />
+      <LineId Id="2" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="25" Count="1" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="12" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.15">
+  <POU Name="fbAdderOfTwentyFive" Id="{2b27895b-3b13-4a78-9e91-3ba77a7cda2d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC fbAdderOfTwentyFive
+VAR_INPUT
+	nInt1 : INT;
+END_VAR
+VAR_OUTPUT
+	nInt2 : INT;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+nInt2 := nInt1 + 25;]]></ST>
+    </Implementation>
+    <LineIds Name="fbAdderOfTwentyFive">
+      <LineId Id="12" Count="0" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
